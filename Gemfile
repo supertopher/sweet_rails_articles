@@ -28,6 +28,7 @@ group :development do
   gem 'annotate'
   gem 'rspec-rails'
   gem 'better_errors'
+  gem 'pry'
 end
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
