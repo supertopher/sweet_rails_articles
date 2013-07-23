@@ -1,17 +1,3 @@
-namespace :populate do
-
-  task :category do
-    if File.exist?(path)
-      raise "ERROR: File '#{path}' already exists"
-    end
-    system ""
-  end
-
-
-end
-
-
-
 task :upandrunning => :environment do
   articles = get_old_articles
   articles.each do |article|
@@ -35,7 +21,7 @@ end
 
 def populate_tags(tags)
   tags.split(", ").each do |tag|
-    Tag.find_or_create_by_description(tag)
+    Tag.find_or_create_by_description_and_slug(description: tag, slug: to_slug(tag))
   end
 end
 
@@ -50,10 +36,9 @@ def parse_categories(new_article, category)
 end
 
 def populate_categories(category)
-  Category.find_or_create_by_description(category.singularize.titleize)
+  Category.find_or_create_by_description_and_slug(description: category.singularize.titleize, slug: to_slug(category.singularize.titleize))
 end
 
 def to_slug(text)
   text.downcase.gsub(/[^a-z1-9]+/, '-').chomp('-')
 end
-

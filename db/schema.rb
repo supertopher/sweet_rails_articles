@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20130723170247) do
 
   create_table "categories", force: true do |t|
     t.string "description"
+    t.string "slug"
   end
 
   create_table "taggings", force: true do |t|
@@ -35,6 +36,7 @@ ActiveRecord::Schema.define(version: 20130723170247) do
 
   create_table "tags", force: true do |t|
     t.string "description"
+    t.string "slug"
   end
 
 end
