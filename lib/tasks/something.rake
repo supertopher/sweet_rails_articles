@@ -20,6 +20,8 @@ task :upandrunning => :environment do
       slug: to_slug(article["title"]) )
     populate_tags(article["tags"])
     parse_tags(new_article, article["tags"])
+    populate_categories(article["category"])
+    parse_categories(new_article, article["category"])
   end
 end
 
@@ -32,20 +34,26 @@ def get_old_articles
 end
 
 def populate_tags(tags)
-    tags.each do |tag|
-      Tag.find_or_create_by_description(tag)
-    end
-    puts "#{Tag.count} Tags in the table"
-end
-
-def parse_tags(new_article, tags)
-  tags.each do |tag|
-    new_tag = Tag.find_by_description(tag)
-    Tagging.create(article_id: new_article.id, tag_id: new_tag.id)
+  tags.split(", ").each do |tag|
+    Tag.find_or_create_by_description(tag)
   end
 end
 
+def parse_tags(new_article, tags)
+  tags.split(", ").each do |tag|
+    new_article.tags << Tag.find_by_description(tag)
+  end
+end
+
+def parse_categories(new_article, category)
+  Category.find_by_description(category.singularize.titleize).articles << new_article
+end
+
+def populate_categories(category)
+  Category.find_or_create_by_description(category.singularize.titleize)
+end
+
 def to_slug(text)
-  .downcase.gsub(/[^a-z1-9]+/, '-').chomp('-')
+  text.downcase.gsub(/[^a-z1-9]+/, '-').chomp('-')
 end
 

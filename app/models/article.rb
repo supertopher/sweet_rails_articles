@@ -27,7 +27,6 @@ class Article < ActiveRecord::Base
       cat = Category.find_by_description(this_article.category)
       puts cat.id
       this_article.update_attribute(:category_id, cat.id)
-
     end
   end
 
