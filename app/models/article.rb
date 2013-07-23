@@ -6,13 +6,16 @@
 #  title       :string(255)
 #  description :text
 #  url         :string(255)
-#  category    :string(255)
-#  tags        :string(255)
 #  category_id :integer
+#  slug        :string(255)
 #
 
 class Article < ActiveRecord::Base
   belongs_to :category
+
+  def to_param
+    slug
+  end
   
   
 
@@ -34,4 +37,15 @@ class Article < ActiveRecord::Base
     end
   end
 
+  def self.add_slug
+    Article.all.each do |article|
+      article.update_attribute(:slug, article.to_slug)
+    end
+  end
+
+  def to_slug
+    self.title.downcase.gsub(/[^a-z1-9]+/, '-').chomp('-')
+  end
+
+  
 end

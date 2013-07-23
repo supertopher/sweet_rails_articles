@@ -9,7 +9,11 @@
 class Category < ActiveRecord::Base
 
   has_many :articles
-
+  
+  def to_param
+    slug
+  end
+  
   def self.populate
     Article.all.each do |article|
       Category.find_or_create_by_description(article.category)

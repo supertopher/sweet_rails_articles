@@ -6,6 +6,9 @@ SweetRailsArticles::Application.routes.draw do
   root 'category#index'
 
   get '/articles/:month/:day/:year/:title' => 'article#show'
+  resources :categories do
+    resources :articles
+  end
     # article = Article.find_by_url "articles/#{params[:month]}/#{params[:day]}/#{params[:year]}/#{params[:title]}"
     # puts articles_path(article)
   # end
