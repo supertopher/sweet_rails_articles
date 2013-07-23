@@ -58,3 +58,11 @@ production:
   pool: 5
   username: 
   password:
+
+old_database:
+  adapter: postgresql
+  encoding: unicode
+  database: sweet_articles-master_development
+  pool: 5
+  username: 
+  password:

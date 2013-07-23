@@ -12,6 +12,9 @@
 
 class Article < ActiveRecord::Base
   belongs_to :category
+  has_many :taggings
+  has_many :tags, through: :taggings
+
 
   def to_param
     slug
@@ -47,5 +50,5 @@ class Article < ActiveRecord::Base
     self.title.downcase.gsub(/[^a-z1-9]+/, '-').chomp('-')
   end
 
-  
+
 end
