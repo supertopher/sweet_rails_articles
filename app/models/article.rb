@@ -14,6 +14,7 @@
 class Article < ActiveRecord::Base
   belongs_to :category
   
+  
 
   def self.assign_category_id
     Article.all.each do |this_article|
