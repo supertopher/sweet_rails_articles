@@ -5,6 +5,11 @@ SweetRailsArticles::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'category#index'
 
+  get '/articles/:month/:day/:year/:title' => 'article#show'
+    # article = Article.find_by_url "articles/#{params[:month]}/#{params[:day]}/#{params[:year]}/#{params[:title]}"
+    # puts articles_path(article)
+  # end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
