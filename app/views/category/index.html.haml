@@ -1,0 +1,6 @@
+-@articles.each do |category, articles|
+  %h3=category.description
+  %ul
+    -articles.each do |article|
+      %li
+        %a=link_to(article.title, article.url)

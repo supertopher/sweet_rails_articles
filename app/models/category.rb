@@ -15,4 +15,5 @@ class Category < ActiveRecord::Base
       Category.find_or_create_by_description(article.category)
     end
   end
+
 end
