@@ -3,12 +3,17 @@ SweetRailsArticles::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'category#index'
+  root 'categories#index'
 
-  get '/articles/:month/:day/:year/:title' => 'article#show'
+  get '/articles/:month/:day/:year/:title' => 'articles#redirect_to_article'
+
+  # get '/categories/:category_name/articles/:title' => 'article#show'
+
   resources :categories do
     resources :articles
   end
+
+
     # article = Article.find_by_url "articles/#{params[:month]}/#{params[:day]}/#{params[:year]}/#{params[:title]}"
     # puts articles_path(article)
   # end
